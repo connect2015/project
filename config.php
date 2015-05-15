@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 //データベース関連
 define('DSN', 'mysql:host=localhost;dbname=connect');
 define('DB_USER', 'dbuser');
@@ -20,10 +18,10 @@ if(!function_exists('imagecreatetruecolor')){
 }
 
 //その他
-define('SITE_URL', 'http://localhost/connect/');
+define('SITE_URL', 'http://localhost/project/');
 define('PASSWORD_KEY', 'sfoasnvosa');
 
 error_reporting(E_ALL & ~E_NOTICE);
 ini_set( 'display_errors', 1 );
 
-session_set_cookie_params(0, '/connect/');
+session_set_cookie_params(0, '/project/');
