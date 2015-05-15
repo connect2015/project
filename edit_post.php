@@ -9,10 +9,13 @@ require_once('function.php');
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 	$dbh = connectDb();
 
+	$id = $_GET['id'];
+	$user = $_GET['user'];
+
 	//post情報の取得
 	$sql1 = "select * from posts where id = :id limit 1";
 	$stmt1 = $dbh->prepare($sql1);
-	$params = array(":id" => $_GET['a']);
+	$params = array(":id" => $id);
 	$stmt1->execute($params);
 	$post = $stmt1->fetch(PDO::FETCH_ASSOC);
 
@@ -38,12 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 			break;
 	}
 
-
 	setToken();
 
 } else {
 	checkToken();
 
+	$id = $_POST['id'];
+	$user = $_POST['user'];
 	$title = $_POST['title'];
 	$body = $_POST['body'];
 	$imagename = $_POST['imagename'];
@@ -55,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 	$params = array(
 		":title" => $title,
 		":body" => $body,
-		":id" => $_POST['post_id']
+		":id" => $id
 	);
 	$stmt->execute($params);
 
@@ -70,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 			$imgtext = '<p><img src="'.$imagepath.'"></p>';
 			break;
 	}
-	header("Location: mypage.php");
+	header("Location: mypage.php?id=".$id."&user=".$user);
 }
 
 //ヘッダー設定
@@ -91,7 +95,8 @@ $me = Head($_SESSION['me']['username']);
 		<p>タイトル：<input type="text" name="title" value="<?php echo h($title); ?>"></p>
 		<p>本文：<input type="textarea" name="body" value="<?php echo h($body); ?>"></p>
 		<input type="hidden" name="token" value="<?php echo h($_SESSION['token']); ?>">
-		<input type="hidden" name="post_id" value="<?php echo h($_GET['a']); ?>">
+		<input type="hidden" name="id" value="<?php echo h($id); ?>">
+		<input type="hidden" name="user" value="<?php echo h($user); ?>">
 		<input type="hidden" name="imagename" value="<?php echo h($imagename); ?>">
 		<p><input type="submit" value='変更を保存'></p>
 		<?php echo $imgtext; ?>
