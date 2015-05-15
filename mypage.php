@@ -48,29 +48,26 @@ foreach ($categories as $category){
 
 $body = $_POST[$category['categoryname']];
 $id = $_POST[$category['categoryname']."_id"];
-$score = $_POST[$category['categoryname']."_score"];
 
 if ($id=="") {
 	$sql = "insert into reviews 
-		(user_id, university_id, category_id, body, score, created, modified)
+		(user_id, university_id, category_id, body, created, modified)
 		values
-		(:user_id, :university_id, :category_id, :body, :score, now(), now())";
+		(:user_id, :university_id, :category_id, :body, now(), now())";
 		$stmt = $dbh->prepare($sql);
 		$params = array(
 			":user_id" => $me['id'],
 			":university_id" => $me['university_id'],
 			":category_id" => $category['id'],
-			":body" => $body,
-			":score" => $score
+			":body" => $body
 			);
 		$stmt->execute($params);
 } else {
-	$sql = "update reviews set body = :body, score =:score where id = :id";
+	$sql = "update reviews set body = :body where id = :id";
 	$stmt = $dbh->prepare($sql);
 	$params = array(
 		":body" => $body,
-		":id" => $id,
-		":score"=> $score
+		":id" => $id
 		);
 
 	$stmt->execute($params);
@@ -103,49 +100,34 @@ if ($id=="") {
 <h1>Mypage</h1>
 
 	<!--Reviews-->
-	<p>Edit Reviews</p>
+	<h1>Edit Reviews</h1>
 	<form action="" method="POST">
 	<?php foreach ($reviews as $review) :?>
 	<p><?php echo $review['categoryname']; ?></p>
-	<p><input type="hidden" name="<?php echo $review['categoryname']; ?>_id" value="<?php echo $review['id'];?>"></p>
-	<P><input type="text" name="<?php echo h($review['categoryname']); ?>" value="<?php echo h($review['body']); ?>"></P>
-	<p>Score about this category
-	<select name="<?php echo $review['categoryname']; ?>_score">
-		<?php for ($i=1; $i<6 ; $i++) { 
-		if($i == $review['score']){
-			echo "<option value=".$i. " selected ".">".$i."</option>";
-		}else{
-			echo "<option value=".$i.">".$i."</option>";
-		}
-		} ;?>
-	</select>	
-	</P>
+	<p><input type="hidden" name="<?php echo $review['categoryname']; ?>_id" value="<?php echo $review['id'];?>"</p>
+	<P><input type="text" name="<?php echo h($review['categoryname'])?>" value="<?php echo h($review['body']); ?>"></P>
 	<br>
-
-
 	<?php endforeach; ?>
 	<input type="submit" value="変更を保存">
-	</form>
 
 	<!--ユーザーによる投稿-->
-	<p>Posts</p>
+	<h1>Posts</h1>
 	
 	<?php foreach ($posts as $post) :?>
 
 <h2>Title:<?php echo $post['title']; ?></h2>
 <p>
-Body:<?php echo $post['body']; ?>
-<br>
-<a href="<?php echo h(SITE_URL);?>edit_post.php?a=<?php echo h($post['id']);?>&user=<?php echo h($post['user_id']);?>">
+Body:<?php echo $post['body']; ?><br>
+<a href="<?php echo h(SITE_URL);?>edit_post.php?id=<?php echo h($post['id']);?>&user=<?php echo h($post['user_id']);?>">
 edit
 </a>　
-<a href="<?php echo h(SITE_URL);?>delete_post.php?a=<?php echo h($post['id']);?>&user=<?php echo h($post['user_id']);?>">
+<a href="<?php echo h(SITE_URL);?>delete_post.php?id=<?php echo h($post['id']);?>&user=<?php echo h($post['user_id']);?>">
 delete
 </a>
 </p>	
 	<?php endforeach; ?>
-	
-	</body>
+	</form>
+</body>
 </html>
 
 
