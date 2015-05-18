@@ -3,11 +3,8 @@
 require_once('config.php');
 require_once('function.php');
 
-<<<<<<< Updated upstream
-=======
 session_start();
 
->>>>>>> Stashed changes
 function getUser($email, $password, $dbh){
 	$sql = "select * from users where email = :email and password = :password limit 1";
 	$stmt = $dbh->prepare($sql);
@@ -75,10 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 		//ログイン処理
 		$_SESSION['me'] = $me;
 		header('Location:'.SITE_URL);
-<<<<<<< Updated upstream
-=======
 		exit;
->>>>>>> Stashed changes
 	}
 }
 
@@ -102,10 +96,7 @@ Head($_SESSION['me']['username']);
 		<input type="hidden" name="token" value="<?php echo h($_SESSION['token']); ?>">
 		<p><input type="submit" value='ログイン'></p>
 	</form>
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 </body>
 </html>
 
