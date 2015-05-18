@@ -19,7 +19,7 @@ function getUser($email, $password, $dbh){
 
 
 
-//ログインしていたら元に戻る
+//ログインしていたら元に戻るぱっぱｓんｖｄぱｍｖｐ
 if($_SESSION['me']) {
 	header("Location:".SITE_URL);
 	exit;

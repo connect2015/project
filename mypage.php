@@ -5,7 +5,7 @@ session_start();
 require_once('config.php');
 require_once('function.php');
 
-//ヘッダー設定
+//ヘッダー設定////
 $me = Head($_SESSION['me']['username']);
 
 $dbh = connectDb();
