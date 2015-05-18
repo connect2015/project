@@ -1,9 +1,12 @@
 <?php	
 
+session_start();
+
 require_once('config.php');
 require_once('function.php');
 
 if(!$_SESSION['me']) {
+	//$_SESSION['guest'] = array('add' =>array('message'=>"ログインしてください"),'lastpage'=> "add.php");
 	header("Location:".SITE_URL."login.php");
 	exit;
 }
@@ -111,6 +114,7 @@ Head($_SESSION['me']['username']);
 	<title>投稿</title>
 </head>
 <body>
+
 	<h1>投稿</h1>
 	<form action="" method="POST" enctype="multipart/form-data">
 		<p>タイトル：<input type="text" name="title" value="<?php echo h($title); ?>"><?php echo h($err['title']); ?></p>
@@ -121,3 +125,5 @@ Head($_SESSION['me']['username']);
 	</form>
 </body>
 </html>
+
+
