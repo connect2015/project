@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 	$stmt->execute($params);
 
 	echo '<p>投稿が完了しました！</p>';
-
+}
 //ヘッダー設定
 Head($_SESSION['me']['username']);
 
