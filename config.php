@@ -7,8 +7,8 @@ define('DB_PASSWORD', 'connect2015');
 
 //画像関連
 define('IMAGES_DIR', dirname($_SERVER['SCRIPT_FILENAME'])."/images");
-define('THUMBNAILS_DIR', dirname($_SERVER['SCRIPT_FILENAME'])."/thumbnails");
-define('THUMBNAILS_WIDTH', 72);
+//define('THUMBNAILS_DIR', dirname($_SERVER['SCRIPT_FILENAME'])."/thumbnails");
+//define('THUMBNAILS_WIDTH', 72);
 define('MAX_SIZE', 307200);
 
 //GD
