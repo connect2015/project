@@ -61,6 +61,6 @@ function Head($user){
 		 "<a href='index.php'>トップ</a>　
 		<a href='login.php'>ログイン</a>　
 		<a href='signup.php'>新規登録</a>　
-		<a href='add.php'>投稿</a>";
+		<a href='add_post.php'>投稿</a>";
 	}
 }

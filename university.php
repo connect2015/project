@@ -62,7 +62,29 @@ foreach ($dbh->query($sql) as $row) {
 	array_push($categories, $row);
 }
 
+
+//平均点の算出
+$averages = array();
+foreach ($categories as $category) :
+$sum = 0;
+$scorenumber = 0;
+foreach ($reviews as $review):
+if ($review['category_id'] == $category['id']){
+$sum = $sum + $review['score'];
+$scorenumber = $scorenumber + 1;
+}
+endforeach;
+$average = $sum / $scorenumber;
+$newaverage = array($category['categoryname']=>$average);
+
+$averages = array_merge($averages,$newaverage);
+endforeach;	
+
 ?>
+
+
+
+
 
 
 <!DOCTYPE html>
@@ -70,29 +92,53 @@ foreach ($dbh->query($sql) as $row) {
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo $university['universityname']; ?></title>
+
+	<script src="https://www.google.com/jsapi"></script>
+<script>
+    google.load('visualization', '1.0', {'packages':['corechart']});
+    google.setOnLoadCallback(drawChart);
+    
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'カテゴリー');
+        data.addColumn('number', 'スコア');
+        
+        <?php foreach ($categories as $category) :?>
+		 data.addRows([
+            ['<?php echo $category['categoryname'];?>', <?php echo $averages[$category['categoryname']];?>]
+        ]);
+		
+        <?php endforeach;?>
+        // グラフのオプションを指定する
+        var options = {
+            title: 'ゲント大学スコア',
+            width: 500,
+            height: 500
+        };
+
+        // 描画する
+        var chart = new google.visualization.ColumnChart(document.getElementById('chart'));
+        chart.draw(data, options);
+    }
+
+</script>
+
+
+
+
 </head> 
 <body>
 	<h1><?php echo $university['universityname']; ?></h1>
-	
-	
+
+	<div id="chart"></div>
+
 	<!--reviewの一覧 -->
 	<p>Reviews</p>
 	<?php foreach ($categories as $category) :?>
 		<p>
 			<h2><?php echo $category['categoryname']; ?></h2>
 			<!--Scoreの平均点表示 -->
-			<?php
-			$sum = 0;
-			$scorenumber = 0;
-			foreach ($reviews as $review):
-			if ($review['category_id'] == $category['id']){
-				$sum = $sum + $review['score'];
-				$scorenumber = $scorenumber + 1;
-			}
-			endforeach;
-			$average = $sum / $scorenumber;
-			echo "  Average score of this category is ". "$average";
-			?>
+			<?php echo "  Average score of this category is ".$averages[$category['categoryname']]; ?>
 		</p>
 	<ul>
 	<?php foreach ($reviews as $review) :?>
@@ -113,7 +159,6 @@ foreach ($dbh->query($sql) as $row) {
 
 
 
-
 	<!--ユーザーによる投稿-->
 	<p>Posts</p>
 	<ul>
@@ -129,5 +174,7 @@ foreach ($dbh->query($sql) as $row) {
 	<li><a href="user.php?id=<?php echo h($user['id']);?>"><?php echo $user['username']; ?></a></li>
 	<?php endforeach; ?>
 	</ul>
+
+
 </body>
 </html>
