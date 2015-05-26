@@ -4,12 +4,12 @@ session_start();
 
 require_once('config.php');
 require_once('function.php');
-require_once("facebook.php");
+require_once('facebook.php');
 
 //facebookログイン用
 $config = array(
-    'appId'  => '1588772488021580',
-    'secret' => '0049bd6e09b21a3fd257461f7b675ec2'
+    'appId'  => APP_ID,
+    'secret' => APP_SECRET
 );
 $facebook = new Facebook($config);
 
@@ -35,8 +35,6 @@ Head($_SESSION['me']['username']);
 	<title>ログイン</title>
 </head>
 <body>
-
-	<h1>ログイン</h1>
 <?php
 		if (isset($user)) {
 			//ログイン済みでユーザー情報が取れていれば表示
@@ -45,11 +43,9 @@ Head($_SESSION['me']['username']);
 			echo '</pre>';
 
 			//ログアウト処理
-			$logoutUrl = $facebook->getLogoutUrl();
-		    //ユーザ情報を取得
-		    $user_info = $facebook->getUser();
+			$logoutUrl = $facebook->getLogoutUrl( array('next' => SITE_URL.'logout.php'));
 		    //ログアウト用のリンクを出力
-		    echo "<h1><a href='".$logoutUrl."'>ログアウト</a></h1>";
+		    echo '<h1><a href="'.$logoutUrl.'">ログアウト</a></h1>';
 
 		} else {
 			//未ログインならログイン URL を取得してリンクを出力
@@ -59,4 +55,3 @@ Head($_SESSION['me']['username']);
 	?>
 </body>
 </html>
-

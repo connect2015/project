@@ -2,15 +2,17 @@
 
 require_once('config.php');
 require_once('function.php');
+require_once('facebook.php');
 
 session_start();
 
-$_SESSION = array();
+$config = array(
+    'appId'   => APP_ID,
+    'secret'  => APP_SECRET,
+);
+$facebook = new Facebook($config);
 
-if(isset($_COOKIE[session_name()])){
-	setcookie(session_name(), '', time()- 86400, '/connect/');
-}
+$facebook->destroySession(); 
 
-session_destroy();
-
-header('Location: '.SITE_URL);
+header("Location: login.php");
+exit;

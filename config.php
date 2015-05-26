@@ -7,6 +7,11 @@ define('DSN', 'mysql:host=localhost;dbname=connect');
 define('DB_USER', 'dbuser');
 define('DB_PASSWORD', 'connect2015');
 
+//facebook関連
+define('APP_ID', '1588772488021580');
+define('APP_SECRET', '0049bd6e09b21a3fd257461f7b675ec2');
+
+
 //画像関連
 define('IMAGES_DIR', dirname($_SERVER['SCRIPT_FILENAME'])."/images");
 define('THUMBNAILS_DIR', dirname($_SERVER['SCRIPT_FILENAME'])."/thumbnails");
