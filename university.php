@@ -6,7 +6,7 @@ require_once('function.php');
 session_start();
 
 //ヘッダー設定
-Head($_SESSION['me']['username']);
+Head($_SESSION['me']['name']);
 
 //大学のidを取得
 $id = $_GET['id'];

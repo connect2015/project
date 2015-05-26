@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 }
 
 //ヘッダー設定
-Head($_SESSION['me']['username']);
+Head($_SESSION['me']['name']);
 
 ?>
 

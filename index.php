@@ -6,7 +6,7 @@ require_once('config.php');
 require_once('function.php');
 
 //ヘッダー設定
-$me = Head($_SESSION['me']['username']);
+$me = Head($_SESSION['me']['name']);
 
 //データベースに接続
 $dbh = connectDb();

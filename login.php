@@ -16,6 +16,12 @@ $facebook = new Facebook($config);
 if ($facebook->getUser()) {
 	try {
 		$user = $facebook->api('/me','GET');
+		$_SESSION['me'] = $user;
+
+		header("Location: mypage.php");
+		exit;
+
+
 	} catch(FacebookApiException $e) {
 		//取得に失敗したら例外をキャッチしてエラーログに出力
 		error_log($e->getType());
@@ -24,7 +30,7 @@ if ($facebook->getUser()) {
 }
 
 //ヘッダー設定
-Head($_SESSION['me']['username']);
+Head($_SESSION['me']['name']);
 
 ?>
 
@@ -38,6 +44,7 @@ Head($_SESSION['me']['username']);
 <?php
 		if (isset($user)) {
 			//ログイン済みでユーザー情報が取れていれば表示
+
 			echo '<pre>';
 			print_r($user);
 			echo '</pre>';
@@ -50,7 +57,7 @@ Head($_SESSION['me']['username']);
 		} else {
 			//未ログインならログイン URL を取得してリンクを出力
 			$loginUrl = $facebook->getLoginUrl();
-			echo '<h1><a href="' . $loginUrl . '">Login with Facebook</a></h1>';
+			echo '<h1><a href="' . $loginUrl . '">ログイン</a></h1>';
 		}
 	?>
 </body>

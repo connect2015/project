@@ -58,9 +58,8 @@ function Head($user){
 
 		//ログアウト状態のユーザー用
 		echo
-		 "<a href='index.php'>トップ</a>　
-		<a href='login.php'>ログイン</a>　
-		<a href='signup.php'>新規登録</a>　
-		<a href='add_post.php'>投稿</a>";
+		"<a href='index.php'>トップ</a>　
+		<a href='add_post.php'>投稿</a>　
+		<a href='login.php'>ログイン</a>";
 	}
 }

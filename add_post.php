@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 	echo '<p>投稿が完了しました！</p>';
 }
 //ヘッダー設定
-Head($_SESSION['me']['username']);
+Head($_SESSION['me']['name']);
 
 ?>
 
