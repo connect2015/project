@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 //データベース関連
 define('DSN', 'mysql:host=localhost;dbname=connect');
 define('DB_USER', 'dbuser');

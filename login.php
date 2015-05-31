@@ -18,8 +18,7 @@ if ($facebook->getUser()) {
 		$user = $facebook->api('/me','GET');
 		$_SESSION['me'] = $user;
 
-		header("Location: mypage.php");
-		exit;
+
 
 
 	} catch(FacebookApiException $e) {
