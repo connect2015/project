@@ -82,3 +82,16 @@ insert into categories (categoryname) values
 ('city'),
 ('university'),
 ('food');
+
+
+//imagesのテーブル作成
+create table images (
+    id int not null auto_increment primary key,
+    post_id int,
+    user_id int,
+    university_id int,
+    filename varchar(255),
+    filepath varchar(255),
+    uploaded datetime default null
+);
+
