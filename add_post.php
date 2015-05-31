@@ -89,12 +89,14 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 	}
 
 	$sql = "insert into images 
-			(post_id, filename, filepath, uploaded)
+			(post_id, university_id, user_id, filename, filepath, uploaded)
 			values
-			(:post_id, :filename, :filepath, now())";
+			(:post_id, :university_id, :user_id, :filename, :filepath, now())";
 	$stmt = $dbh->prepare($sql);
 	$params = array(
 		":post_id" => $id,
+		":university_id" => $_SESSION['me']['id'],
+		":user_id" => $_SESSION['me']['university_id'],
 		":filename" => $imageFileName,
 		":filepath" => $imageFIlePath
 		);

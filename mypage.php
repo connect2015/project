@@ -41,8 +41,17 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
 		array_push($reviews, $review);
 	}
 
+	$images = array();
+	$sql = "select * from images where user_id = ".$me['id'];
+	foreach($dbh->query($sql) as $row){
+		array_push($images, $row);
+	}
+
+
+
 } else {
 	//POSTだったら
+
 //カテゴリー毎で回して、データベースをUpdateする
 foreach ($categories as $category){
 
@@ -89,6 +98,15 @@ if ($id=="") {
 		$review['categoryname'] = $category['categoryname'];
 		array_push($reviews, $review);
 }
+
+$images = array();
+$sql = "select * from images where user_id = ".$me['id'];
+foreach($dbh->query($sql) as $row){
+	array_push($images, $row);
+}
+
+
+
 }
 
 ?>
@@ -100,6 +118,7 @@ if ($id=="") {
 	<title>Mypage</title>
 </head>
 <body>
+
 <h1>Mypage</h1>
 
 	<!--Reviews-->
@@ -131,10 +150,15 @@ if ($id=="") {
 	<p>Posts</p>
 	
 	<?php foreach ($posts as $post) :?>
+	<?php foreach ($images as $image) :?>
 
 <h2>Title:<?php echo $post['title']; ?></h2>
 <p>
 Body:<?php echo $post['body']; ?>
+<?php if($post['id']==$image['post_id']):?>
+<br>
+<img src ="images/<?php echo $image['filename']; ?>" >
+<?php endif; ?>
 <br>
 <a href="<?php echo h(SITE_URL);?>edit_post.php?a=<?php echo h($post['id']);?>&user=<?php echo h($post['user_id']);?>">
 edit
@@ -143,6 +167,7 @@ edit
 delete
 </a>
 </p>	
+	<?php endforeach; ?>
 	<?php endforeach; ?>
 	
 	</body>

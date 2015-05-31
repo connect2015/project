@@ -30,6 +30,12 @@ if(!$users){
 	$users = "No users in this university";
 }
 
+//写真の取得
+$images = array();
+$sql = "select * from images where university_id = ".$id;
+foreach($dbh->query($sql) as $row){
+	array_push($images, $row);
+}
 
 //ユーザーのpostsを取得(新しい順)
 $posts = array();
@@ -131,6 +137,11 @@ endforeach;
 	<h1><?php echo $university['universityname']; ?></h1>
 
 	<div id="chart"></div>
+
+	<?php foreach ($images as $image) :?>
+	<img src ="images/<?php echo $image['filename']; ?>" >
+	<br>
+	<?php endforeach; ?>
 
 	<!--reviewの一覧 -->
 	<p>Reviews</p>
