@@ -134,6 +134,9 @@ endforeach;
 
 </head> 
 <body>
+
+	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" auto_logout_link="true">
+</fb:login-button>
 	<h1><?php echo $university['universityname']; ?></h1>
 
 	<div id="chart"></div>
@@ -161,12 +164,14 @@ endforeach;
 	echo " by ";
 	echo "<a href="."user.php?id=".$review['user_id'].">";
 	echo $review['username']; 
-	}; 
+	
 	echo "</a>";
-	echo "</li>"; ?>
+	echo "</li>";};  ?>
 	<?php endforeach; ?>
 </ul>
 	<?php endforeach; ?>
+
+	
 
 
 
@@ -174,7 +179,11 @@ endforeach;
 	<p>Posts</p>
 	<ul>
 	<?php foreach ($posts as $post) :?>
-	<li><a href="edit_post.php?id=<?php echo $post['id'];?>&user=<?php echo $post['user_id'];?>"><?php echo $post['title']; ?></a></li>
+	<li><a href="edit_post.php?id=<?php echo $post['id'];?>&user=<?php echo $post['user_id'];?>"><?php echo $post['title']; ?></a>
+	<p><?php echo $post['body']; ?></p>
+	<div class="fb-like" data-href="http://localhost/project/edit_post.php?id=<?php echo $post['id'];?>" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+	<div class="fb-comments" data-href="http://localhost/project/edit_post.php?id=<?php echo $post['id'];?>" data-version="v2.3"　data-numposts="5" data-colorscheme="light"></div>
+	</li>
 	<?php endforeach; ?>
 	</ul>
 
@@ -187,5 +196,6 @@ endforeach;
 	</ul>
 
 
+<script src="connect.js"></script>
 </body>
 </html>

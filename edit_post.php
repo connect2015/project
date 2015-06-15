@@ -101,5 +101,12 @@ Head($_SESSION['me']['username']);
 		<p><input type="submit" value='変更を保存'></p>
 		<?php echo $imgtext; ?>
 	</form>
+
+<div class="fb-like" data-href="http://localhost/project/edit_post.php?id=<?php echo $post['id'];?>" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+<div class="fb-comments" data-href="http://localhost/project/edit_post.php?id=<?php echo $post['id'];?>" data-version="v2.3"　data-numposts="5" data-colorscheme="light"></div>
+	
+
+<script src="connect.js"></script>
+
 </body>
 </html>
