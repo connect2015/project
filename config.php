@@ -3,7 +3,7 @@
 //データベース関連
 define('DSN', 'mysql:host=localhost;dbname=connect');
 define('DB_USER', 'dbuser');
-define('DB_PASSWORD', 'connect2015');
+define('DB_PASSWORD', 'kohei1993');
 
 //facebook関連
 define('APP_ID', '1588772488021580');
