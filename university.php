@@ -135,7 +135,7 @@ endforeach;
 </head> 
 <body>
 
-	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" auto_logout_link="true">
+<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" auto_logout_link="true">
 </fb:login-button>
 	<h1><?php echo $university['universityname']; ?></h1>
 

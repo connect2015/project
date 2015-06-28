@@ -27,6 +27,8 @@ foreach($dbh->query($sql) as $row){
 	<title>Top</title>
 </head>
 <body>
+	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();" auto_logout_link="true">
+	</fb:login-button>
 	<h1>Connect Top</h1>
 	<p>Select University</p>
 	<ul>
@@ -37,6 +39,7 @@ foreach($dbh->query($sql) as $row){
 	</li>
 	<?php endforeach; ?>
 </ul>
+<script src="connect.js"></script>
 </body>
 </html>
 
