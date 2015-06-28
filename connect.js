@@ -1,3 +1,4 @@
+
   // This is called with the results from from FB.getLoginStatus().
   function statusChangeCallback(response) {
     console.log('statusChangeCallback');
@@ -8,6 +9,13 @@
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
       // Logged into your app and Facebook.
+
+      //新規登録チェック
+
+      //新規登録処理
+
+
+
       testAPI();
       info();
     } else if (response.status === 'not_authorized') {
@@ -83,4 +91,6 @@ function info(){
   document.getElementById('profile').innerHTML =　'hello' + response.name;
 });
 }
+
+
 

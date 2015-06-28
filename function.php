@@ -35,6 +35,16 @@ function emailExist($email, $dbh){
 	return $user ? true : false;
 }
 
+function user_idExist($user_id, $dbh){
+	$sql = "select * from users where id = :user_id limit 1";
+	$stmt = $dbh->prepare($sql);
+	$stmt->execute(array(":user_id" => $user_id));
+	$user = $stmt->fetch();
+	return $user ? true : false;
+}
+
+
+
 function getSha1Password($s){
 	return (sha1(PASSWORD_KEY.$s));
 }
@@ -64,3 +74,4 @@ function Head($user){
 		<a href='add_post.php'>投稿</a>";
 	}
 }
+
