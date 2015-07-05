@@ -21,6 +21,8 @@ facebookLogin();
 <div id="status">
 </div>
 
+
+
 <div id="profile">
 </div>
 
@@ -29,6 +31,7 @@ facebookLogin();
 <?php echo $user_id ;?>
 
 <div class="fb-comments" data-href="http://localhost/facebook_login/facebook.php" data-version="v2.3"></div>
+
 
 <div class="fb-like" data-href="http://localhost/facebook_login/trial.php" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
 
