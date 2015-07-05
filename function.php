@@ -62,7 +62,7 @@ function facebookLogin(){
 
   require '/Applications/MAMP/htdocs/project/facebook-php-sdk-v4/autoload.php';
 
-  FacebookSession::setDefaultApplication('436865333162259', 'e5734ceef09b1e70dbaea90660ede073');
+  FacebookSession::setDefaultApplication(APP_ID, APP_PASSWORD);
 
 
 
