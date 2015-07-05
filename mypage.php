@@ -4,7 +4,6 @@ require_once('config.php');
 require_once('function.php');
 
 $dbh = connectDb();
-$id = $me['id'];
 
 //カテゴリ情報を取得
 $categories = array();

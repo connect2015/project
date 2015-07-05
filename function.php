@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
 use Facebook\GraphUser;
@@ -56,15 +54,10 @@ function getSha1Password($s){
 }
 
 function facebookLogin(){
-  define('FACEBOOK_SDK_V4_SRC_DIR', '/Applications/MAMP/htdocs/project/facebook-php-sdk-v4/src/Facebook/');
-  //require __DIR__ . '/facebook-php-sdk-v4/autoload.php';
-
 
   require '/Applications/MAMP/htdocs/project/facebook-php-sdk-v4/autoload.php';
 
-  FacebookSession::setDefaultApplication(APP_ID, APP_PASSWORD);
-
-
+  FacebookSession::setDefaultApplication(APP_ID, APP_SECRET);
 
   // Add `use Facebook\FacebookJavaScriptLoginHelper;` to top of file
   $helper = new FacebookJavaScriptLoginHelper();
