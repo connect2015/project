@@ -2,6 +2,12 @@
 
 session_start();
 
+use Facebook\FacebookSession;
+use Facebook\FacebookRequest;
+use Facebook\GraphUser;
+use Facebook\FacebookRequestException;
+use Facebook\FacebookJavaScriptLoginHelper;
+
 function connectDb(){
 	try {
 		return new PDO(DSN, DB_USER, DB_PASSWORD);
@@ -35,6 +41,16 @@ function emailExist($email, $dbh){
 	return $user ? true : false;
 }
 
+function user_idExist($user_id, $dbh){
+	$sql = "select * from users where id = :user_id limit 1";
+	$stmt = $dbh->prepare($sql);
+	$stmt->execute(array(":user_id" => $user_id));
+	$user = $stmt->fetch();
+	return $user ? true : false;
+}
+
+
+
 function getSha1Password($s){
 	return (sha1(PASSWORD_KEY.$s));
 }
@@ -64,3 +80,75 @@ function Head($user){
 		<a href='add_post.php'>投稿</a>";
 	}
 }
+
+function facebookLogin(){
+  define('FACEBOOK_SDK_V4_SRC_DIR', '/Applications/MAMP/htdocs/project/facebook-php-sdk-v4/src/Facebook/');
+  //require __DIR__ . '/facebook-php-sdk-v4/autoload.php';
+
+
+  require '/Applications/MAMP/htdocs/project/facebook-php-sdk-v4/autoload.php';
+
+  FacebookSession::setDefaultApplication('436865333162259', 'e5734ceef09b1e70dbaea90660ede073');
+
+
+
+  // Add `use Facebook\FacebookJavaScriptLoginHelper;` to top of file
+  $helper = new FacebookJavaScriptLoginHelper();
+  try {
+    $session = $helper->getSession();
+  } catch(FacebookRequestException $ex) {
+    // When Facebook returns an error
+  } catch(\Exception $ex) {
+    // When validation fails or other local issues
+  }
+  if ($session) {
+    // Logged in
+  }
+
+  //var_dump($session);
+
+
+  if($session) {
+    try {
+      $user_profile = (new FacebookRequest(
+        $session, 'GET', '/me'
+      ))->execute()->getGraphObject(GraphUser::className());
+      echo "Name: " . $user_profile->getName();
+      $username = $user_profile->getName();    
+      $user_url = $user_profile->getLink();
+      $user_id = $user_profile->getId();
+      //var_dump($user_profile);
+
+      //新規登録されてるかチェック
+      $dbh = connectDb();
+      if(!user_idExist($user_id,$dbh)){
+      
+      //新規登録処理
+      $sql = "insert into users
+      (id, username, created, modified) 
+      values
+      (:user_id, :name, now(),now())";
+
+
+      $stmt = $dbh->prepare($sql);
+
+      $params = array(
+        ":user_id"=> $user_id,
+        ":name"=> $username,
+        );
+
+      $stmt->execute($params);
+      }
+      
+
+    } catch(FacebookRequestException $e) {
+      echo "Exception occured, code: " . $e->getCode();
+      echo " with message: " . $e->getMessage();
+    }   
+  }
+
+
+
+  echo "<script src='connect.js'></script>";
+}
+

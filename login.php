@@ -3,8 +3,6 @@
 require_once('config.php');
 require_once('function.php');
 
-session_start();
-
 function getUser($email, $password, $dbh){
 	$sql = "select * from users where email = :email and password = :password limit 1";
 	$stmt = $dbh->prepare($sql);
