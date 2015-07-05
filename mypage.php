@@ -1,12 +1,7 @@
 <?php
 
-session_start();
-
 require_once('config.php');
 require_once('function.php');
-
-//ヘッダー設定
-$me = Head($_SESSION['me']['username']);
 
 $dbh = connectDb();
 $id = $me['id'];
@@ -101,7 +96,7 @@ if ($id=="") {
 </head>
 <body>
 <h1>Mypage</h1>
-
+<script src="connect.js"></script>
 	<!--Reviews-->
 	<p>Edit Reviews</p>
 	<form action="" method="POST">

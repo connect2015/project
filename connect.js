@@ -14,10 +14,9 @@
 
       //新規登録処理
 
-
-
       testAPI();
       info();
+
     } else if (response.status === 'not_authorized') {
       // The person is logged into Facebook, but not your app.
       document.getElementById('status').innerHTML = 'Please log ' +

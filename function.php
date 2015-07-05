@@ -55,32 +55,6 @@ function getSha1Password($s){
 	return (sha1(PASSWORD_KEY.$s));
 }
 
-function Head($user){
-
-	if($user) {
-
-		//ログイン状態のユーザー用
-		echo
-		 "<a href='index.php'>トップ</a>　
-		<a href='add_post.php'>投稿</a>　
-		<a href='mypage.php'>マイページ</a>　
-		<strong>"
-		.$user.
-		"</strong> でログインしています <a href='logout.php'>ログアウト</a>";
-
-		return $_SESSION['me'];
-
-	} else {
-
-		//ログアウト状態のユーザー用
-		echo
-		 "<a href='index.php'>トップ</a>　
-		<a href='login.php'>ログイン</a>　
-		<a href='signup.php'>新規登録</a>　
-		<a href='add_post.php'>投稿</a>";
-	}
-}
-
 function facebookLogin(){
   define('FACEBOOK_SDK_V4_SRC_DIR', '/Applications/MAMP/htdocs/project/facebook-php-sdk-v4/src/Facebook/');
   //require __DIR__ . '/facebook-php-sdk-v4/autoload.php';
