@@ -3,16 +3,6 @@
 require_once('config.php');
 require_once('function.php');
 
-session_start();
-
-if($_SESSION['me']) {
-	header("Location: ".SITE_URL);
-	exit;
-} 
-
-//ヘッダー設定
-Head($_SESSION['me']['username']);
-
 if ($_SERVER['REQUEST_METHOD'] != 'POST') {
 
 	//POSTではなかったら
