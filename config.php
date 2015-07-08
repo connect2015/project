@@ -1,9 +1,11 @@
 <?php
 
+session_start();
+
 //データベース関連
 define('DSN', 'mysql:host=localhost;dbname=connect');
 define('DB_USER', 'dbuser');
-define('DB_PASSWORD', 'kohei1993');
+define('DB_PASSWORD', 'connect2015');
 
 //facebook関連
 define('APP_ID', '1588772488021580');
@@ -29,4 +31,4 @@ define('PASSWORD_KEY', 'sfoasnvosa');
 error_reporting(E_ALL & ~E_NOTICE);
 ini_set( 'display_errors', 1 );
 
-session_set_cookie_params(0, '/project/');
+session_set_cookie_params(0, '/connect/');

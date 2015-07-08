@@ -1,11 +1,9 @@
 <?php 
 
+define('FACEBOOK_SDK_V4_SRC_DIR', '/Applications/MAMP/htdocs/project/facebook-php-sdk-v4/src/Facebook/');
 
-
-define('FACEBOOK_SDK_V4_SRC_DIR', '/Applications/MAMP/htdocs/facebook_login/facebook-php-sdk-v4/src/Facebook/');
-//require __DIR__ . '/facebook-php-sdk-v4/autoload.php';
-
-require '/Applications/MAMP/htdocs/facebook_login/facebook-php-sdk-v4/autoload.php';
+require '/Applications/MAMP/htdocs/project/facebook-php-sdk-v4/autoload.php';
+require_once('config.php');
 
 use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
@@ -13,11 +11,9 @@ use Facebook\GraphUser;
 use Facebook\FacebookRequestException;
 use Facebook\FacebookJavaScriptLoginHelper;
 
-FacebookSession::setDefaultApplication('436865333162259', 'e5734ceef09b1e70dbaea90660ede073');
+FacebookSession::setDefaultApplication(APP_ID, APP_SECRET);
 
 
-
-// Add `use Facebook\FacebookJavaScriptLoginHelper;` to top of file
 $helper = new FacebookJavaScriptLoginHelper();
 try {
   $session = $helper->getSession();
@@ -29,8 +25,6 @@ try {
 if ($session) {
   // Logged in
 }
-
-var_dump($session);
 
 
 if($session) {
@@ -45,8 +39,6 @@ if($session) {
     echo " with message: " . $e->getMessage();
   }   
 }
-
-
 
 ?>
 
@@ -94,7 +86,7 @@ if($session) {
 
   window.fbAsyncInit = function() {
   FB.init({
-    appId      : '436865333162259',
+    appId      : '1588772488021580',
     cookie     : true,  // enable cookies to allow the server to access 
                         // the session
     xfbml      : true,  // parse social plugins on this page
@@ -139,11 +131,11 @@ if($session) {
       });
   }
 
-function info(){
-  FB.api('/me', function(response) {
-  document.getElementById('profile').innerHTML =　'hello' + response.name;
-});
-}
+// function info(){
+//   FB.api('/me', function(response) {
+//   document.getElementById('profile').innerHTML =　'hello' + response.name;
+// });
+// }
 
 
 </script>
@@ -167,8 +159,6 @@ function info(){
 </div>
 
 <a href="<?php echo $user_url ?>">userpage</a>
-
-
 
 
 <div class="fb-comments" data-href="http://localhost/facebook_login/facebook.php" data-version="v2.3"></div>
