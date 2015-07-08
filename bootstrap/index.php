@@ -36,7 +36,7 @@
     <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
         <div class="container topnav">
             <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
+            <div class="navbar-header col-sm-4">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -45,8 +45,13 @@
                 </button>
                 <a class="navbar-brand topnav" href="#">Connect</a>
             </div>
+
+            <div class="navbar-header col-sm-3 text-center navbar-brand topnav" id="bs-example-navbar-collapse-1">
+                    
+            </div>
+
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="col-sm-5 text-center" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="#about">Universities</a>
@@ -71,24 +76,39 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="intro-message">
-                        <h1>Landing Page</h1>
-                        <h3>A Template by Start Bootstrap</h3>
+                <div class="intro-message">
+                        <h1>Connect</h1>
+                        <h3>一人一人のよりよい留学に向けて</h3>
                         <hr class="intro-divider">
-                        <ul class="list-inline intro-social-buttons">
-                            <li>
-                                <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
-                            </li>
-                            <li>
-                                <a href="https://github.com/IronSummitMedia/startbootstrap" class="btn btn-default btn-lg"><i class="fa fa-github fa-fw"></i> <span class="network-name">Github</span></a>
-                            </li>
-                            <li>
-                                <a href="#" class="btn btn-default btn-lg"><i class="fa fa-linkedin fa-fw"></i> <span class="network-name">Linkedin</span></a>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
+
+                 <div class="col-lg-3 col-md-6 col-sm-3 text-center">
+                            <i class="fa fa-4x fa fa-search wow bounceIn text-primary"></i>
+                            <h3>特徴①</h3>
+                            <p class="text-muted">ion about a web service</p>
+                 </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-3 text-center">
+                            <i class="fa fa-4x fa fa-search wow bounceIn text-primary"></i>
+                            <h3>特徴②</h3>
+                            <p class="text-muted">about a web service</p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-3 text-center">
+                            <i class="fa fa-4x fa fa-search wow bounceIn text-primary"></i>
+                            <h3>特徴③</h3>
+                            <p class="text-muted">about a web service</p>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-3 text-center">
+                            <i class="fa fa-4x fa fa-search wow bounceIn text-primary"></i>
+                            <h3>特徴④</h3>
+                            <p class="text-muted">about a web service</p>
+                </div>
+
+            </div>
+            <div class ="text-center">
+            <a href="#contents" class="btn btn-default btn-xl page-scroll" style="background-color: blue; color:white">大学一覧へ</a>
             </div>
 
         </div>
@@ -96,6 +116,11 @@
 
     </div>
     <!-- /.intro-header -->
+
+
+
+    
+       
 
     <!-- Page Content -->
 
