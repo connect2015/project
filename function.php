@@ -90,21 +90,17 @@ function facebookLogin(){
       $dbh = connectDb();
       if(!user_idExist($user_id,$dbh)){
       
-      //新規登録処理
-      $sql = "insert into users
-      (id, username, created, modified) 
-      values
-      (:user_id, :name, now(),now())";
-
-
-      $stmt = $dbh->prepare($sql);
-
-      $params = array(
-        ":user_id"=> $user_id,
-        ":name"=> $username,
-        );
-
-      $stmt->execute($params);
+        //新規登録処理
+        $sql = "insert into users
+        (id, username, created, modified) 
+        values
+        (:user_id, :name, now(),now())";
+        $stmt = $dbh->prepare($sql);
+        $params = array(
+          ":user_id"=> $user_id,
+          ":name"=> $username,
+          );
+        $stmt->execute($params);
       }
       
 
@@ -118,4 +114,6 @@ function facebookLogin(){
 
   echo "<script src='connect.js'></script>";
 }
+
+FacebookLogin();
 

@@ -4,6 +4,7 @@ require_once('config.php');
 require_once('function.php');
 
 $dbh = connectDb();
+$id = "";
 
 //カテゴリ情報を取得
 $categories = array();
@@ -18,7 +19,6 @@ $sql = "select * from posts where user_id = ".$id." order by modified desc limit
 foreach($dbh->query($sql) as $row){
 	array_push($posts,$row);
 }
-
 
 //POSTじゃなかったら（つまり最初に開いたとき）
 if($_SERVER['REQUEST_METHOD'] != 'POST'){
@@ -36,39 +36,39 @@ if($_SERVER['REQUEST_METHOD'] != 'POST'){
 	}
 
 } else {
-	//POSTだったら
-//カテゴリー毎で回して、データベースをUpdateする
-foreach ($categories as $category){
+		//POSTだったら
+	//カテゴリー毎で回して、データベースをUpdateする
+	foreach ($categories as $category){
 
-$body = $_POST[$category['categoryname']];
-$id = $_POST[$category['categoryname']."_id"];
-$score = $_POST[$category['categoryname']."_score"];
+	$body = $_POST[$category['categoryname']];
+	$id = $_POST[$category['categoryname']."_id"];
+	$score = $_POST[$category['categoryname']."_score"];
 
-if ($id=="") {
-	$sql = "insert into reviews 
-		(user_id, university_id, category_id, body, score, created, modified)
-		values
-		(:user_id, :university_id, :category_id, :body, :score, now(), now())";
+	if ($id=="") {
+		$sql = "insert into reviews 
+			(user_id, university_id, category_id, body, score, created, modified)
+			values
+			(:user_id, :university_id, :category_id, :body, :score, now(), now())";
+			$stmt = $dbh->prepare($sql);
+			$params = array(
+				":user_id" => $me['id'],
+				":university_id" => $me['university_id'],
+				":category_id" => $category['id'],
+				":body" => $body,
+				":score" => $score
+				);
+			$stmt->execute($params);
+	} else {
+		$sql = "update reviews set body = :body, score =:score where id = :id";
 		$stmt = $dbh->prepare($sql);
 		$params = array(
-			":user_id" => $me['id'],
-			":university_id" => $me['university_id'],
-			":category_id" => $category['id'],
 			":body" => $body,
-			":score" => $score
+			":id" => $id,
+			":score"=> $score
 			);
-		$stmt->execute($params);
-} else {
-	$sql = "update reviews set body = :body, score =:score where id = :id";
-	$stmt = $dbh->prepare($sql);
-	$params = array(
-		":body" => $body,
-		":id" => $id,
-		":score"=> $score
-		);
 
-	$stmt->execute($params);
-}
+		$stmt->execute($params);
+	}
 
 }
 
@@ -94,8 +94,12 @@ if ($id=="") {
 	<title>Mypage</title>
 </head>
 <body>
+<h1>Profile</h1>
+<p>Must</p>
+<p>氏名：<?php echo $user_profile->getName();?></p>
+<p>Want</p>
+
 <h1>Mypage</h1>
-<script src="connect.js"></script>
 	<!--Reviews-->
 	<p>Edit Reviews</p>
 	<form action="" method="POST">
@@ -138,7 +142,7 @@ delete
 </a>
 </p>	
 	<?php endforeach; ?>
-	
+	<script src="connect.js"></script>
 	</body>
 </html>
 
